@@ -4,8 +4,7 @@ DevOps Portfolio for Level Up in Tech
 Week 1 -3 
 Introduction to Linux
 
-Week 4
-GitHub and source control
+Week 4 GitHub and source control
 
 5 
 
@@ -13,22 +12,22 @@ Week 6-11 AWS
 
 6 
 
-7
+7 
 
 8 
 
 9 
 
-Week 10 Cloud Resume
+Week 10 Exam prep for AWS Certified Developer Associates
 
-Week 12 - 15 Python
-12
+#Week 12 - 15 Python
+12 Introduction to Python
 
-13
+13 Continuing Python
 
-14
+14 Python and AWS
 
-15
+15 Python, boto3 and Lambda
 
 #Week 16 - 19 Containerization (Docker, Kubernetes)
 
