@@ -32,13 +32,13 @@ Week 12 - 15 Python
 
 #Week 16 - 19 Containerization (Docker, Kubernetes)
 
-16
+16 Dockers
 
-17 
+17 Introduction to Kubernetes
 
-18
+18 KCNA
 
-19
+19 CKA 
 
 20 - 24 Terraform
 
