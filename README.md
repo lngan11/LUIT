@@ -7,17 +7,17 @@ Introduction to Linux
 Week 4
 GitHub and source control
 
-Week 5 
+5 
 
 Week 6-11 AWS
 
-Week 6 
+6 
 
-Week 7
+7
 
-Week 8 
+8 
 
-Week 9 
+9 
 
 Week 10 Cloud Resume
 
@@ -32,15 +32,23 @@ Week 12 - 15 Python
 
 #Week 16 - 19 Containerization (Docker, Kubernetes)
 
-Week 16
+16
 
-Week 17 
+17 
 
-Week 18
+18
 
-Week 19
+19
 
-Week 20 - 24 Terraform
+20 - 24 Terraform
 
-Week 20
+20
+
+21
+
+22
+
+23
+
+24
 
