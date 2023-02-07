@@ -9,6 +9,7 @@ GitHub and source control
 
 Week 5 
 
+Week 6-11 AWS
 Week 6 
 
 Week 7
@@ -17,20 +18,19 @@ Week 8
 
 Week 9 
 
-
 Week 10 
 Cloud Resume
 
-Week 11
+#Week 12 - 15 Python
+12
 
-Week 12
+13
 
-Week 13
+14
 
-Week 14
+15
 
-Week 15 
-
+#Week 16 - 19 Containerization (Docker, Kubernetes)
 Week 16
 
 Week 17 
