@@ -1,0 +1,67 @@
+#create deployment
+kubectl create deployment nginx-deployment --image=nginx
+
+#detail of deployment
+kubectl describe deployment nginx-deployment
+
+#event logs
+kubectl describe events
+
+#delete
+kubectl delete deployment nginx-deployment
+
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.17.9
+        ports:
+        - containerPort: 80
+        
+        
+#4 replica
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+
+#apply tye updated yaml files
+kubectl apply -f nginx-deployment.yaml
+
+#verify the change
+kubectl describe deployment nginx-deployment
+
+
+
+
+
+
+

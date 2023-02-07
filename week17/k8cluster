@@ -1,0 +1,70 @@
+#commands on control and worker
+#copy each line one at a time
+#each line is individual, unless specified otherwise
+
+#for the control plane
+sudo hostnamectl set-hostname control-plane 
+
+#copy line 9-12
+cat << EOF | sudo tee /etc/modules-load.d/containerd.conf
+overlay
+br_netfilter
+EOF
+
+sudo modprobe overlay
+sudo modprobe br_netfilter
+
+#copy line 18-22
+cat << EOF | sudo tee /etc/sysctl.d/99-kubernetes-cri.conf
+net.bridge.bridge-nf-call-iptables = 1
+net.bridge.bridge-nf-call-ip6tables = 1
+net.ipv4.ip_forward = 1
+EOF
+
+sudo sysctl --system
+sudo apt-get update && sudo apt-get install -y containerd.io
+sudo mkdir -p /etc/containerd
+sudo containerd config default | sudo tee /etc/containerd/config.toml
+sudo systemctl restart containerd
+sudo swapoff -a && sudo sed -i '/ swap / s/^/#/' /etc/fstab
+sudo apt-get update && sudo apt-get install -y apt-transport-https curl
+curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
+  
+#34-36
+cat << EOF | sudo tee /etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main                                                                                                                                                                                             
+EOF
+
+sudo apt-get update
+sudo apt-get install -y kubelet=1.25.5-00 kubeadm=1.25.5-00 kubectl=1.25.5-00 #may use different version but make sure everything is the same version
+sudo apt-mark hold kubelet kubeadm kubectl
+
+#for the worker nodes
+sudo hostnamectl set-hostname worker1 #name it however you want
+#Repeat line 8-40
+
+#THIS IS ONLY ON THE CONTROL PLANE NODE, DO NOT DO THIS ON THE WORKER NODE
+sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --kubernetes-version 1.25.5 #or whichever version you used
+#there is some information on here you need to remember, at the bottom you see some information like this; this is an example, you need to use yours to connect the nodes
+kubeadm join 10.0.0.103:6443 --token esx8gu.4lwdwn5nqdmr7isu \
+        --discovery-token-ca-cert-hash sha256:dfddc149f2094d2b190918ab9fea05b197c6c741434b93b9ca6a618d9b6d1726 
+
+mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+kubectl get nodes #should see the message below, see anything else? you fucked up; double check the readme for troubleshooting
+NAME            STATUS     ROLES           AGE   VERSION
+control-plane   NotReady   control-plane   91s   v1.25.5
+
+kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+ 
+#BACK TO THE WORKER NODE
+#go back to line 47-49 and copy and paste yours
+kubeadm join 10.0.0.103:6443 --token esx8gu.4lwdwn5nqdmr7isu \
+        --discovery-token-ca-cert-hash sha256:dfddc149f2094d2b190918ab9fea05b197c6c741434b93b9ca6a618d9b6d1726 
+#IF SUCESSFUL YOU WILL SEE
+NAME            STATUS     ROLES           AGE   VERSION
+control-plane   Ready      control-plane   59m   v1.25.5
+worker-1        Ready      <none>          30m   v1.25.5
+worker2         NotReady   <none>          8s    v1.25.5

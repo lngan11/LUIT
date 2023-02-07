@@ -1,0 +1,48 @@
+# week17 project
+FOUNDATIONAL
+
+Using the command line,
+create a deployment that runs the nginx image.
+Display the details of this deployment
+check the event logs from the deployment
+delete the deployment
+
+ADVANCED
+
+Create the same deployment using a yaml file
+Display the details of this deployment via the command line
+Update the yaml file to scale the deployment to 4 nginx containers
+Verify the change via the command line
+
+COMPLEX
+
+Create a multi-container pod that runs nginx and Debian containers
+Expose port 80 in nginx container
+Mount any local directory to the nginx container so it is available inside the container
+Create a NodePort service using port 80
+
+
+#Creating a K8 control plane and worker node(s)
+
+This was created on Cloud9
+
+When you create the Cloud9 environment you NEED to select the following or it will not work; 1 control + however many worker nodes you need
+-Ubuntu
+-t3.small instance
+
+Go back to EC2 and set up the security group correct
+Allow all inbound traffic on all three instances
+
+**FOR THE CONTROL PLANE SECURITY GROUP ONLY**
+Allow all traffic but instead of 0.0.0.0/0, specify the worker node security group
+
+This is how the control plane communicates with the worker nodes, if you do not do this, you will receive a port 8080 error when you use the command 'kubectl get nodes' and you will complain it doesn't work and cry
+
+
+[ERROR CRI]: container runtime is not running: output: time="2023-02-02T03:24:03Z" level=fatal msg="validate service connection: CRI v1 runtime API is not implemented for endpoint \"unix:///var/run/containerd/containerd.sock\": rpc error: code = Unimplemented desc = unknown service runtime.v1.RuntimeService"
+, error: exit status 1
+
+Got something like ^
+Two things to try:
+1. Make sure there is a config.toml file in the directory /etc/containerd
+2. Just remake the Cloud9 environment again and redo the steps. You messed up somewhere else. DO NOT DEVIATE FROM STEPS. DO NOT SKIP STEPS. DO NOT ALTER STEPS. 
