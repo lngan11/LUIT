@@ -1,0 +1,12 @@
+#Advanced section; persistent volumn claim
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-k8s
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 250Mi
+

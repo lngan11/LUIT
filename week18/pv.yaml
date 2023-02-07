@@ -1,0 +1,25 @@
+#Advance portion; Persistent volume; creates a 250 MB disk space in the directory
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-k8s
+spec:
+  capacity:
+    storage: 250Mi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: /temp/k8s
+
+---
+#Request the 250 MB disk space created in the PV
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-temp-k8s
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 250Mi

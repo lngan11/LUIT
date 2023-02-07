@@ -1,0 +1,14 @@
+# week18
+
+FOUNDATIONAL
+Spin up two deployments.  One deployment contains 2 pods running the nginx image.  Include a ConfigMap that points to a custom index.html page that contains the line “This is Deployment One”.  The other deployment contains 2 pods running the nginx image.  Include a ConfigMap that points to a custom index.html page that contains the line “This is Deployment Two”.
+
+Create a service that points to both deployments.  You should be able to both deployments using the same ip address and port number.
+
+Hit the refresh button on the web page to validate that you eventual see the index.html pages from both Deployment 1 and Deployment 2.
+
+ADVANCED
+Create a Kubernetes persistent storage manifest that gets 250MB of disk space on the host computer in the /temp/k8s directory.   Create a corresponding persistent storage claim manifest file.
+
+COMPLEX
+Create a Kubernetes CronJob that spins up both deployments and the service at a specific time.   Test to ensure the CronJob works as expected.

@@ -1,0 +1,101 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: deploy-and-service
+spec:
+  schedule: "0 0 * * *" # Run every day at midnight
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          name: deploy-and-service
+        spec:
+          containers:
+            # Container for Deployment One
+            - name: deployment-one
+              image: nginx
+              env:
+                - name: CUSTOM_INDEX
+                  valueFrom:
+                    configMapKeyRef:
+                      name: deployment-one-config
+                      key: index.html
+              volumeMounts:
+                - name: config-volume
+                  mountPath: /usr/share/nginx/html
+                  readOnly: true
+            # Container for Deployment Two
+            - name: deployment-two
+              image: nginx
+              env:
+                - name: CUSTOM_INDEX
+                  valueFrom:
+                    configMapKeyRef:
+                      name: deployment-two-config
+                      key: index.html
+              volumeMounts:
+                - name: config-volume
+                  mountPath: /usr/share/nginx/html
+                  readOnly: true
+          volumes:
+            - name: config-volume
+              configMap:
+                name: deployment-one-config
+          restartPolicy: OnFailure
+      # Create the service
+      - apiVersion: v1
+        kind: Service
+        metadata:
+          name: nginx-service
+        spec:
+          selector:
+            app: nginx
+          ports:
+            - name: http
+              port: 80
+              targetPort: 80
+          type: ClusterIP
+  # Create the configMap for Deployment One
+  - apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: deployment-one-config
+    data:
+      index.html: |
+        <html>
+          <head>
+            <title>Deployment One</title>
+          </head>
+          <body>
+            This is Deployment One
+          </body>
+        </html>
+  # Create the configMap for Deployment Two
+  - apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: deployment-two-config
+    data:
+      index.html: |
+        <html>
+          <head>
+            <title>Deployment Two</title>
+          </head>
+          <body>
+            This is Deployment Two
+          </body>
+        </html>
+
+
+#Schedule has to be in UTC time
+#Change the "schedule" accordingly to this, can leave as * if no day of month, month and day of week specified
+* * * * *
+- - - - -
+| | | | |
+| | | | ----- Day of week (0 - 7) (Sunday = both 0 and 7)
+| | | ------- Month (1 - 12)
+| | --------- Day of month (1 - 31)
+| ----------- Hour (0 - 23)
+------------- Minute (0 - 59)
+
+#example "0 0 * * *"  Run every day at midnight
