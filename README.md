@@ -40,5 +40,7 @@ Week 18
 
 Week 19
 
+Week 20 - 24 Terraform
+
 Week 20
 
