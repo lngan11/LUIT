@@ -39,9 +39,13 @@ sudo apt-get update
 sudo apt-get install -y kubelet=1.25.5-00 kubeadm=1.25.5-00 kubectl=1.25.5-00 #may use different version but make sure everything is the same version
 sudo apt-mark hold kubelet kubeadm kubectl
 
+----------------------------------------------------------------------------------------------------------------
+
 #for the worker nodes
 sudo hostnamectl set-hostname worker1 #name it however you want
 #Repeat line 8-40
+
+----------------------------------------------------------------------------------------------------------------
 
 #THIS IS ONLY ON THE CONTROL PLANE NODE, DO NOT DO THIS ON THE WORKER NODE
 sudo kubeadm init --pod-network-cidr=192.168.0.0/16 --kubernetes-version 1.25.5 #or whichever version you used
