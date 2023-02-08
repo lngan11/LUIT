@@ -6,9 +6,9 @@ Introduction to Linux
 
 Week 4 GitHub and source control
 
-5 
+Week 5 - 11 AWS
 
-Week 6-11 AWS
+5 Overview of AWS; Cloud Practitioner
 
 6 
 
