@@ -62,6 +62,8 @@ NAME            STATUS     ROLES           AGE   VERSION
 control-plane   NotReady   control-plane   91s   v1.25.5
 
 kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+
+----------------------------------------------------------------------------------------------------------------
  
 #BACK TO THE WORKER NODE
 #go back to line 47-49 and copy and paste yours
