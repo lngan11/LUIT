@@ -1,1 +1,73 @@
+This week you will design and diagram a 3 tier architecture. What this quick video for a better understanding of what a 3 tier architecture is: https://youtu.be/nMSp3ygB5F0
 
+For a free diagraming tool you can use https://app.diagrams.net/  or https://lucid.app/ (there are others out there, but stick with free).
+
+Video on how to diagram: https://youtu.be/cLnuMtuTB2M
+
+Verification and Deliverables:
+
+Make sure you can access the web tier web page from the internet.
+
+From the web tier verify that you can ping the application tier from the web tier by running the ping command from an EC2 instance in the web tier.
+
+Send diagram to coaches
+
+FOUNDATIONAL
+
+Scenario:
+You have been asked to design and create a highly available 3 Tier architecture for your company's new web application.
+
+Advice:
+1)Build out one tier at a time. The best way to eat an elephant is one bite at a time.
+2)Verify that you can do the foundational project first before building out to the ADVANCED and COMPLEX options.
+NOTE: NAT Gateways, Elastic IPs, and ALBs do have a small cost. Ensure you delete them after your project.
+
+Web Tier
+
+2 public subnets
+
+Minimum of 2 EC2 instances with an OS of your choice (free tier) in an Auto Scaling Group.
+
+EC2 Web Server Security Group allowing inbound permission from the internet.
+
+Boot strap static web page or create a custom AMI that already includes the static web page.
+
+Create a public route table and associate the 2 public subnets.
+
+Application Tier
+
+2 private subnets
+
+Minimum of 2 EC2 instances with an OS of your choice (free tier) in an Auto Scaling Group.
+
+EC2 Application Server Security Group allowing inbound permission from the Web Server Security Group.
+
+Associate with private route table.Note: This is not a true application tier as we don't have any provided code to run on the EC2 instances.
+
+Database Tier
+
+Use a free Tier MySql RDS Database.
+
+The Database Security Group should allow inbound traffic for MySQL from the Application Server Security Group.
+
+2 private subnets.
+
+Associate with private route table.Note: No need to use Multi-AZ but be sure to document how you would add it
+
+Remember that when diagraming this tier you are only creating one RDS instance in one subnet even though you are creating two subnets. If you use multi-az or a read replica then and only then should you have a second instance. Make sure to label accordingly.
+
+Considerations:
+
+You will need to configure a public route table along with private route tables.
+
+You will need a Nat Gateway in one of your public subnets to allow your instances in private subnets to update packages and patches. Make sure to include this in the private route table.
+
+In order to reach your EC2 instances in the private subnets, you will either need a bastion host in the public subnet or need to use SSM. You will need to research into both to see which works better for your use case.
+
+Plan out your CIDRs before you create your VPC and Subnets
+
+ADVANCED (DO NOT ATTEMPT UNTIL YOU HAVE DONE THE FOUNDATIONAL PROJECT)
+Application Load Balancers should be used for the Web Tiers with the same Security Group considerations. Example The ALB should allow HTTP traffic from 0.0.0.0/0 and the Web Server Security group should allow traffic only from the ALB. Don't forget to create Target Groups and enable Health Checks.
+
+COMPLEX
+Do all of this using CloudFormation
