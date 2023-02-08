@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: deployment-2
 spec:
-  replicas: 2
+  replicas: 4
   selector:
     matchLabels:
       app: deployment-2
@@ -22,3 +22,32 @@ spec:
       - name: config-volume
         configMap:
           name: deployment-2-config
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: deployment-2-config
+data:
+  index.html: |
+    <html>
+      <body>
+        <h1>This is Deployment Two</h1>
+      </body>
+    </html>
+    
+---
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: week18-deployment-2
+spec:
+  selector:
+    app: deployment-2
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  type: ClusterIP
