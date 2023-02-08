@@ -46,3 +46,7 @@ Got something like ^
 Two things to try:
 1. Make sure there is a config.toml file in the directory /etc/containerd
 2. Just remake the Cloud9 environment again and redo the steps. You messed up somewhere else. DO NOT DEVIATE FROM STEPS. DO NOT SKIP STEPS. DO NOT ALTER STEPS. 
+
+#Joining worker node to control plane
+kubeadm token create --print-join-command
+Use this command in the control plane to paste into worker node you want to add to the cluster
