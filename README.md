@@ -1,53 +1,53 @@
 # LUIT
 DevOps Portfolio for Level Up in Tech
 
-#Week 1 -3 
+#Week 1 - 3 
 Introduction to Linux
 
 #Week 4 GitHub and source control
 
 #Week 5 - 11 AWS
 
-5 Overview of AWS; Cloud Practitioner
+5. Overview of AWS; Cloud Practitioner
 
-6 IAM, AWS CLI, Git, VPC, EC2, ELB
+6. IAM, AWS CLI, Git, VPC, EC2, ELB
 
-7 S3, CloudFront, IaC, PaaS, Lambda, SAM, DynamoDB, API
+7. S3, CloudFront, IaC, PaaS, Lambda, SAM, DynamoDB, API
 
-8 ECS, EKS, CI/CD, Databases, Security
+8. ECS, EKS, CI/CD, Databases, Security
 
-9 Practice Exam
+9. Practice Exam
 
-Week 10 Exam prep for AWS Certified Developer Associates
+10. Exam prep for AWS Certified Developer Associates
 
 #Week 12 - 15 Python
-12 Introduction to Python
+12. Introduction to Python
 
-13 Continuing Python
+13. Continuing Python
 
-14 Python and AWS
+14. Python and AWS
 
-15 Python, boto3 and Lambda
+15. Python, boto3 and Lambda
 
 #Week 16 - 19 Containerization (Docker, Kubernetes)
 
-16 Dockers
+16. Dockers
 
-17 Introduction to Kubernetes / KCNA
+17. Introduction to Kubernetes / KCNA
 
-18 CKA
+18. CKA
 
-19 - EKS / ECS
+19. - EKS / ECS
 
 20 - 24 Terraform
 
-20
+20.
 
-21
+21.
 
-22
+22.
 
-23
+23.
 
-24
+24.
 
