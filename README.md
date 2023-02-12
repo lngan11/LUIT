@@ -6,7 +6,9 @@ Project posted on https://medium.com/@longngan
 #Week 1 - 3 
 Introduction to Linux
 
+
 #Week 4 GitHub and source control
+
 
 #Week 5 - 11 AWS
 
@@ -22,6 +24,7 @@ Introduction to Linux
 
 10. Exam prep for AWS Certified Developer Associates
 
+
 #Week 12 - 15 Python
 12. Introduction to Python
 
@@ -30,6 +33,7 @@ Introduction to Linux
 14. Python and AWS
 
 15. Python, boto3 and Lambda
+
 
 #Week 16 - 19 Containerization (Docker, Kubernetes)
 
@@ -41,7 +45,8 @@ Introduction to Linux
 
 19. EKS / ECS
 
-20 - 24 Terraform
+
+#Week 20 - 24 Terraform
 
 20.
 
