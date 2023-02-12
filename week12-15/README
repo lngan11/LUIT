@@ -1,0 +1,97 @@
+#Projects Description
+
+#Week 12
+AWS Service Inventory
+
+Create a list of services using Python. IE: S3, Lambda, EC2, etc
+
+The list should be empty initially.
+
+Populate the list using append or insert.
+
+Print the list and the length of the list.
+
+Remove two specific services from the list by name or by index.
+
+Print the new list and the new length of the list.
+
+#Week 13
+tip: you will need the random python library (https://docs.python.org/3/library/random.html)
+
+EC2 Random Name Generator
+
+Several departments share an AWS environment. You need to ensure that the EC2s are properly named and are unique so team members can easily tell who the EC2 instances belong to. Use Python to create your unique EC2 names that the users can then attach to the instances. The Python Script should:
+
+All the user to input how many EC2 instances they want names for and output the same amount of unique names.
+
+Allow the user to input the name of their department that is used in the unique name.
+
+Generate random characters and numbers that will be included in the unique name.
+
+ADVANCED
+The only departments that should use this Name Generator are the Marketing, Accounting, and FinOps Departments. List these departments as options and if a user puts another department, print a message that they should not use this Name Generator. Be sure to account for incorrect upper or lowercase letters in the correct department. Example: a user inputs accounting vs Accounting.
+
+COMPLEX
+Turn the above into a Function and execute the Function to verify it works.
+
+#Week 14
+All code should be inline commented.
+
+Create a DynamoDB table for something of your choosing (e.g. movies, food, games).
+
+Using the Gist (https://gist.github.com/zaireali649/0ec6b90155120cf508223788b7b86efc) as a starting point, use boto3 and Python to add 10 or more items to the table.
+
+Use boto3 and Python to scan the DynamoDB table.
+
+ADVANCED
+
+Use boto3 and Python to query a table, remove an item from a table, create a table, and delete a table.
+
+COMPLEX
+
+Create a lambda function using boto3 and Python to query a table, return an item from a table and remove/delete an item from a table.
+
+Run a test of the lambda function to verify you were able to do all of the previous actions.
+
+Create APIs using API Gateway using the console that will each return query a table, return an item, delete an item by calling your lambda function.Note: You can reference the following documentation to point you in the right direction. The code they are using is NOT Python so take that into consideration: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html
+
+#Week 15
+*Be sure to reference the Boto3 Documentation.
+
+All code should be inline commented.
+
+Create a Standard SQS Queue using Python.
+
+Create a Lambda function in the console with a Python 3.7 or higher runtime
+
+Modify the Lambda to send a message to the SQS queue. Your message should contain either the current time or a random number. You can use the built-in test function for testing.
+
+Create an API gateway HTTP API type trigger.
+
+Test the trigger to verify the message was sent.
+
+ADVANCED:
+
+Create a SNS topic using Python.
+
+Use an email to subscribe to the SNS topic.
+
+Create a Lambda function with a Python 3.7 or higher runtime
+
+Modify the Lambda to trigger when new messages arrive in the SQS queue you created earlier.
+
+The Lambda should publish the SQS message that triggered it to the SNS topic.
+
+Validate the entire architecture works by triggering the API you created earlier. You should receive the notification from the SNS subscription.
+
+COMPLEX
+
+Create a DynamoDB table using Python.
+
+Create a Lambda function with a Python 3.7 or higher runtime
+
+Modify the Lambda to trigger on publishes to the SNS topic from the advanced project.
+
+Modify the Lambda to store the output of the SNS topic to the DynamoDB table, along with the date it was posted, and a unique identifier.
+
+
