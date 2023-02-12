@@ -1,10 +1,9 @@
-#Deployment
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: deployment-1
 spec:
-  replicas: 4
+  replicas: 2
   selector:
     matchLabels:
       app: deployment-1
@@ -16,6 +15,8 @@ spec:
       containers:
       - name: nginx
         image: nginx
+        ports:
+        - containerPort: 80
         volumeMounts:
         - name: config-volume
           mountPath: /usr/share/nginx/html
@@ -25,7 +26,7 @@ spec:
           name: deployment-1-config
 
 ---
-#Config Map
+
 apiVersion: v1
 kind: ConfigMap
 metadata:
@@ -37,18 +38,3 @@ data:
         <h1>This is Deployment One</h1>
       </body>
     </html>
-
----
-#Service
-apiVersion: v1
-kind: Service
-metadata:
-  name: week18-deployment-1
-spec:
-  selector:
-    app: deployment-1
-  ports:
-  - name: http
-    port: 80
-    targetPort: 80
-  type: ClusterIP
