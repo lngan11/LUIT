@@ -1,4 +1,4 @@
-# LUIT
+# Level Up in Tech Program Topics and Projects
 DevOps Portfolio for Level Up in Tech
 
 #Week 1 - 3 
