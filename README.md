@@ -43,7 +43,7 @@ Introduction to Linux
 
 18. CKA
 
-19. EKS / ECS
+19. EKS / ECS, Troubleshooting Kubernetes
 
 
 #Week 20 - 24 Terraform
