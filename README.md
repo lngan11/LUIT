@@ -48,7 +48,7 @@ Introduction to Linux
 
 #Week 20 - 24 Terraform
 
-20. Terraform basics
+20. Terraform basics 
 
 21.
 
