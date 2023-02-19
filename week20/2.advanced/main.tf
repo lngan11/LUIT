@@ -25,4 +25,5 @@ resource "aws_security_group" "jenkins" {
   name_prefix = "jenkins-sg-"
 
   ingress {
-    from_port  
+    from_port =
+  }
