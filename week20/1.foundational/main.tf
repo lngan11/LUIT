@@ -2,33 +2,23 @@ provider "aws" {
   region = "us-east-1"
 }
 
-resource "aws_instance" "jenkins" {
-  ami           = "ami-0c55b159cbfafe1f0"
-  instance_type = "t2.micro"
-  key_name      = "my-key"
-  security_groups = [
-    aws_security_group.jenkins.name,
-  ]
-
-  user_data = <<-EOF
-              #!/bin/bash
-              sudo yum update -y
-              sudo yum install -y java-1.8.0
-              wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
-              rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-              sudo yum install -y jenkins
-              sudo systemctl start jenkins
-              EOF
+resource "aws_vpc" "tf_vpc" {
+  cidr_block = "10.0.0.0/16"
 }
 
-resource "aws_security_group" "jenkins" {
-  name_prefix = "jenkins-sg-"
+resource "aws_subnet" "tf_subnet" {
+  vpc_id     = aws_vpc.tf_vpc.id
+  cidr_block = "10.0.1.0/24"
+}
+
+resource "aws_security_group" "tf_sg" {
+  name_prefix = "tf-sg-"
 
   ingress {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${var.allowed_ip}/32"]
+    cidr_blocks = ["0.0.0.0/32"]
   }
 
   ingress {
@@ -37,11 +27,61 @@ resource "aws_security_group" "jenkins" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+
+  vpc_id = aws_vpc.tf_vpc.id
+}
+
+resource "aws_instance" "tf_instance" {
+  ami           = "ami-0dfcb1ef8550277af"
+  instance_type = "t2.micro"
+  key_name      = "tf_key"
+  associate_public_ip_address = true 
+  vpc_security_group_ids = [aws_security_group.tf_sg.id]
+  subnet_id     = aws_subnet.tf_subnet.id
+  iam_instance_profile = "Terraform-EC2-S3-FullAccess"
+
+  tags = {
+    Name = "terraform-project"
+  }
+
+  user_data = <<EOF
+  #!/bin/bash
+# Install Jenkins and Java 
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum upgrade
+# Add required dependencies for the jenkins package
+sudo amazon-linux-extras install -y java-openjdk11 
+sudo yum install -y jenkins
+sudo systemctl daemon-reload
+
+# Start Jenkins
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+
+              EOF
 }
 
 resource "aws_s3_bucket" "jenkins_artifacts" {
   bucket = "my-jenkins-artifacts"
-}
-#Using the AWS provider to create an EC2 instance, a security group for the instance, and an S3 bucket for Jenkins artifacts. We are also using user_data to bootstrap the EC2 instance with a script that installs and starts Jenkins.
 
-#The security group allows traffic on port 22 only from the user's IP address and allows traffic from port 8080 from any IP address.
+  versioning {
+    enabled = true
+  }
+
+  server_side_encryption_configuration {
+    rule {
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
+      }
+    }
+  }
+}
+
+resource "aws_s3_bucket_acl" "jenkins_artifacts" {
+  bucket = aws_s3_bucket.jenkins_artifacts.id
+
+  acl = "private"
+}
+
