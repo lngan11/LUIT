@@ -104,34 +104,26 @@ resource "aws_route_table" "private_route_table" {
   }
 }
 
-locals {
-  public_subnets = [
-    aws_subnet.public_subnet_1.id,
-    aws_subnet.public_subnet_2.id
-  ]
-}
-
-resource "aws_route_table_association" "public_rt" {
-  for_each = toset(local.public_subnets)
-
-  subnet_id      = each.value
+resource "aws_route_table_association" "public_rt_1" {
+  subnet_id      = aws_subnet.public_subnet_1.id
   route_table_id = aws_route_table.public_route_table.id
 }
 
-locals {
-  private_subnets = [
-    aws_subnet.private_subnet_1.id,
-    aws_subnet.private_subnet_2.id
-  ]
-}
-
-resource "aws_route_table_association" "private_rt" {
-  for_each = toset(local.private_subnets)
-
-  subnet_id      = each.value
+resource "aws_route_table_association" "public_rt_2" {
+  subnet_id      = aws_subnet.public_subnet_2.id
   route_table_id = aws_route_table.public_route_table.id
 }
 
+
+resource "aws_route_table_association" "private_rt_1" {
+  subnet_id      = aws_subnet.private_subnet_1.id
+  route_table_id = aws_route_table.private_route_table.id
+}
+
+resource "aws_route_table_association" "private_rt_2" {
+  subnet_id      = aws_subnet.private_subnet_2.id
+  route_table_id = aws_route_table.private_route_table.id
+}
 
 # Security Group Resources
 resource "aws_security_group" "alb_security_group" {
@@ -192,6 +184,7 @@ resource "aws_autoscaling_group" "asg" {
   launch_template {
     id      = aws_launch_template.launch_template.id
     version = aws_launch_template.launch_template.latest_version
+
   }
 }
 
@@ -203,8 +196,12 @@ resource "aws_launch_template" "launch_template" {
   instance_type = "t2.micro"
   user_data     = base64encode(var.user_data)
 
-}
+  network_interfaces {
+    device_index    = 0
+    security_groups = [aws_security_group.asg_security_group.id]
 
+  }
+}
 #Application Load Balancer
 
 resource "aws_lb" "alb" {
