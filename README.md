@@ -50,9 +50,9 @@ Introduction to Linux
 
 20. Terraform basics 
 
-21.
+21. Continue Terraform basics
 
-22.
+22. Terraform modules, Terraform Workflow, Implement and maintain State
 
 23.
 
