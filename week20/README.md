@@ -1,3 +1,5 @@
+https://medium.com/@longngan/deploying-ec2-instance-using-terraform-8c10e2fc5b7a
+
 Your team would like to start using Jenkins as their CI/CD tool to create pipelines for DevOps projects. They need you to create the Jenkins server using Terraform so that it can be used in other environments and so that changes to the environment are better tracked. For the Foundational project you are allowed to have all your code in a single main.tf file (known as a monolith) with hardcoded data.
 
 #FOUNDATIONAL 
