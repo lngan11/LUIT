@@ -1,5 +1,5 @@
 #Projects Description
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 #Week 12
 AWS Service Inventory
 
@@ -14,6 +14,7 @@ Print the list and the length of the list.
 Remove two specific services from the list by name or by index.
 
 Print the new list and the new length of the list.
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #Week 13
 tip: you will need the random python library (https://docs.python.org/3/library/random.html)
@@ -33,6 +34,7 @@ The only departments that should use this Name Generator are the Marketing, Acco
 
 COMPLEX
 Turn the above into a Function and execute the Function to verify it works.
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #Week 14
 All code should be inline commented.
@@ -55,6 +57,7 @@ Run a test of the lambda function to verify you were able to do all of the previ
 
 Create APIs using API Gateway using the console that will each return query a table, return an item, delete an item by calling your lambda function.Note: You can reference the following documentation to point you in the right direction. The code they are using is NOT Python so take that into consideration: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-dynamo-db.html
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 #Week 15
 *Be sure to reference the Boto3 Documentation.
 
