@@ -1,0 +1,33 @@
+https://medium.com/@longngan/how-to-launch-an-auto-scaling-group-with-application-load-balancer-using-terraform-a1ba8c3b7932
+
+
+#Foundation
+Launch an Auto Scaling group that spans 2 subnets in your default vpc.
+
+Create a security group that allows traffic from the internet and associate it with the Auto Scaling group instances.
+
+Include a script in your user data to launch an apache webserver. The Auto Scaling group should have a min of 2 and max of 5.
+
+To verify everything is working check the public ip addresses of the two instances. Manually terminate one of the instances to verify that another one spins up to meet the minimum requirement of 2 instances.
+
+#Advanced
+
+Add an ALB in front of the Auto Scaling group.
+
+Create a security group for the ALB that allows traffic from the internet and associate it with the ALB.
+
+Modify the Auto Scaling group security group to allow only traffic from the ALB.
+
+Output the public dns name of the ALB and verify you are able to reach your webservers from your browser.
+
+#Complex
+
+Create a custom vpc rather than using the default vpc.
+
+The custom vpc should have 2 public subnets, 2 private subnets, a public route table and private route table, a NAT Gateway in the public subnet, and an Internet Gateway so there is outbound internet traffic.
+
+Launch your ALB in the public subnets.
+
+Launch your Auto Scaling group in your private subnets
+
+Output your public DNS of your ALB and then verify you can reach your Webserver via the url.
