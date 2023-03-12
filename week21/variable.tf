@@ -44,4 +44,3 @@ sudo cat > /var/www/html/index.html << EOF
 
 EOF
 }
-
