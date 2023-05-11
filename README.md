@@ -54,7 +54,7 @@ Introduction to Linux
 
 22. Terraform modules, Terraform Workflow, Implement and maintain State
 
-23.
+23. Practice Exam 
 
-24.
+24. Terraform Associate Exam
 
